@@ -60,6 +60,11 @@ export DEBIAN_FRONTEND=noninteractive \
 && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
 && pipenv install baselines/ \
 && pipenv install \
+&& git clone https://github.com/ros/xacro --depth 1 \
+&& export PYTHONPATH=\$PYTHONPATH:$(pwd)/xacro/src \
+&& cd YamaX \
+&& python3 ../xacro/xacro.py --inorder --xacro-ns robots/yamax.xacro > ../yamax.urdf
+&& cd .. \
 && echo "Dependency installation succeeded" \
 && . creds.sh \
 && . run.sh \
