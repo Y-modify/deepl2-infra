@@ -4,6 +4,7 @@
 # $DEEPL2_DISCORD_CHANNEL
 # $DEEPL2_DISCORD_TOKEN
 # $DEEPL2_S3_BUCKET_NAME
+# $DEEPL2_YAMAX_VERSION
 # $TF_VAR_access_key
 # $TF_VAR_secret_key
 # Optional:
@@ -65,11 +66,7 @@ echo $DEEPL2_ADDITIONAL_SSH_PUBKEY >> ~/.ssh/authorized_keys \
 && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
 && pipenv install baselines/ \
 && pipenv install \
-&& git clone https://github.com/ros/xacro --depth 1 \
-&& export PYTHONPATH=\$PYTHONPATH:$(pwd)/xacro/src \
-&& cd YamaX \
-&& python3 ../xacro/xacro.py --inorder --xacro-ns robots/yamax.xacro > ../yamax.urdf
-&& cd .. \
+&& curl -o yamax.urdf https://github.com/Y-modify/YamaX/releases/download/${DEEPL2_YAMAX_VERSION}/YamaX_${DEEPL2_YAMAX_VERSION}.urdf \
 && echo "Dependency installation succeeded" \
 && . creds.sh \
 && . run.sh \
