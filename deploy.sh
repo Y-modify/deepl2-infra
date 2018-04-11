@@ -8,6 +8,7 @@
 # $TF_VAR_secret_key
 # Optional:
 # $DEEPL2_ADDITIONAL_SSH_PUBKEY
+# $DEEPL2_INSTANCE_TYPE
 
 echo -e 'y\n' | ssh-keygen -t rsa -b 4096 -C "me@coord-e.com" -N '' -f ~/.ssh/terraform
 
@@ -15,6 +16,8 @@ cat << EOS > terraform.tfvars
 key_name = "terraform"
 public_key_path = "~/.ssh/terraform.pub"
 EOS
+
+[ -z "$DEEPL2_INSTANCE_TYPE" ] || echo "instance_type = \"$DEEPL2_INSTANCE_TYPE\"" >> terraform.tfvars
 
 cat << EOS > creds.sh
 export BUCKET_NAME='${DEEPL2_S3_BUCKET_NAME}'
