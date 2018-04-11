@@ -53,7 +53,9 @@ done
 scp -o StrictHostKeychecking=no -r -i ~/.ssh/terraform [!.]* ubuntu@$IP_ADDR:/home/ubuntu/deepl2 || exit -1
 
 ssh -t -t -o StrictHostKeychecking=no -i ~/.ssh/terraform ubuntu@$IP_ADDR << EOS || exit -1
-export DEBIAN_FRONTEND=noninteractive \
+echo $DEEPL2_ADDITIONAL_SSH_PUBKEY >> ~/.ssh/authorized_keys \
+&& echo "SSH key injection succeeded" \
+&& export DEBIAN_FRONTEND=noninteractive \
 && cd /home/ubuntu/deepl2 \
 && sudo -E apt-get update \
 && sudo -E apt-get install -y -qq ffmpeg python3-pip python3-tk libffi-dev libopenmpi-dev libssl-dev psmisc curl git \
@@ -72,7 +74,5 @@ export DEBIAN_FRONTEND=noninteractive \
 && . creds.sh \
 && . run.sh \
 && echo "Deploy succeeded" \
-&& echo $DEEPL2_ADDITIONAL_SSH_PUBKEY >> ~/.ssh/authorized_keys \
-&& echo "SSH key injection succeeded" \
 && exit
 EOS
