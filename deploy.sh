@@ -66,7 +66,7 @@ echo $DEEPL2_ADDITIONAL_SSH_PUBKEY >> ~/.ssh/authorized_keys \
 && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
 && pipenv install baselines/ \
 && pipenv install \
-&& curl -o yamax.urdf https://github.com/Y-modify/YamaX/releases/download/${DEEPL2_YAMAX_VERSION}/YamaX_${DEEPL2_YAMAX_VERSION}.urdf \
+&& curl -fsSL -o yamax.urdf https://github.com/Y-modify/YamaX/releases/download/${DEEPL2_YAMAX_VERSION}/YamaX_${DEEPL2_YAMAX_VERSION}.urdf \
 && echo "Dependency installation succeeded" \
 && . creds.sh \
 && . run.sh \
