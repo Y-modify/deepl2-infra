@@ -14,7 +14,7 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends -qq ffmpeg python3-pip python3-tk libffi-dev openmpi-bin libopenmpi-dev libssl-dev psmisc curl git \
+    && apt-get install -y --no-install-recommends -qq ffmpeg python3-pip python3-tk libffi-dev openmpi-bin libopenmpi-dev libssl-dev psmisc curl git build-essential \
     && pip3 install pipenv \
     && pip3 install awscli \
     && apt-get autoremove -y \
