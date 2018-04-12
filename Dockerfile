@@ -5,30 +5,26 @@
 # $AWS_ACCESS_KEY_ID
 # $AWS_SECRET_ACCESS_KEY
 
-FROM ubuntu:xenial
+FROM alpine
 
 ENV DEEPL2_YAMAX_VERSION=4.0
 
-ENV DEBIAN_FRONTEND=noninteractive
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends -qq ffmpeg python3-pip python3-tk libffi-dev openmpi-bin libopenmpi-dev libssl-dev psmisc curl git build-essential python3-dev \
-    && pip3 install pipenv \
-    && pip3 install awscli \
-    && apt-get autoremove -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /
 
-RUN git clone https://github.com/Y-modify/deepl2 --depth 1 \
+RUN apk --no-cache --update add ffmpeg python3 python3-tkinter openmpi-bin psmisc \
+    && apk --no-cache --virtual add .builddep python3-dev libffi-dev libopenmpi-dev openssl-dev git curl build-base \
+    && pip3 install pipenv \
+    && pip3 install awscli \
+    && git clone https://github.com/Y-modify/deepl2 --depth 1 \
     && cd deepl2 \
     && git clone https://github.com/openai/baselines --depth 1 \
     && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
     && pipenv install baselines/ --keep-outdated \
-    && pipenv install --keep-outdated
+    && pipenv install --keep-outdated \
+    && apk --purge del .builddep
 
 ADD https://github.com/Y-modify/YamaX/releases/download/${DEEPL2_YAMAX_VERSION}/YamaX_${DEEPL2_YAMAX_VERSION}.urdf /deepl2/yamax.urdf
 
