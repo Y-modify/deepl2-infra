@@ -14,8 +14,8 @@ ENV LANG=C.UTF-8
 
 WORKDIR /
 
-RUN apk --no-cache --update add ffmpeg python3 python3-tkinter openmpi-bin psmisc \
-    && apk --no-cache add --virtual .builddep python3-dev libffi-dev libopenmpi-dev openssl-dev git curl build-base \
+RUN apk --no-cache --update add ffmpeg python3 python3-tkinter openmpi psmisc \
+    && apk --no-cache add --virtual .builddep python3-dev libffi-dev openmpi-dev openssl-dev git curl build-base \
     && pip3 install pipenv \
     && pip3 install awscli \
     && git clone https://github.com/Y-modify/deepl2 --depth 1 \
