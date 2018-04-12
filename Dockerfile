@@ -24,6 +24,7 @@ RUN apt-get update \
 WORKDIR /
 
 RUN git clone https://github.com/Y-modify/deepl2 --depth 1 \
+    && cd deepl2 \
     && git clone https://github.com/openai/baselines --depth 1 \
     && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
     && pipenv install baselines/ \
