@@ -14,8 +14,8 @@ ENV LANG=C.UTF-8
 
 WORKDIR /
 
-RUN apk --update add ffmpeg python3 python3-tkinter psmisc openblas \
-    && apk add --virtual .builddep openblas-dev gfortran python3-dev libffi-dev openssl-dev git curl build-base \
+RUN apk --update add ffmpeg python3 python3-tkinter freetype libpng psmisc openblas \
+    && apk add --virtual .builddep openblas-dev gfortran freetype-dev libpng-dev python3-dev libffi-dev openssl-dev git curl build-base \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk add --update-cache openmpi openmpi-dev \
     && pip3 install pipenv \
