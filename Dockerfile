@@ -14,8 +14,10 @@ ENV LANG=C.UTF-8
 
 WORKDIR /
 
-RUN apk --no-cache --update add ffmpeg python3 python3-tkinter openmpi psmisc \
-    && apk --no-cache add --virtual .builddep python3-dev libffi-dev openmpi-dev openssl-dev git curl build-base \
+RUN apk --update add ffmpeg python3 python3-tkinter psmisc \
+    && apk add --virtual .builddep python3-dev libffi-dev openssl-dev git curl build-base \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk add --update-cache openmpi openmpi-dev \
     && pip3 install pipenv \
     && pip3 install awscli \
     && git clone https://github.com/Y-modify/deepl2 --depth 1 \
@@ -24,7 +26,8 @@ RUN apk --no-cache --update add ffmpeg python3 python3-tkinter openmpi psmisc \
     && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
     && pipenv install baselines/ --keep-outdated \
     && pipenv install --keep-outdated \
-    && apk --purge del .builddep
+    && apk --purge del .builddep openmpi-dev \
+    && rm -rf /var/cache/apk/*
 
 ADD https://github.com/Y-modify/YamaX/releases/download/${DEEPL2_YAMAX_VERSION}/YamaX_${DEEPL2_YAMAX_VERSION}.urdf /deepl2/yamax.urdf
 
