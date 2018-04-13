@@ -24,6 +24,7 @@ RUN apk --update add ffmpeg python3 python3-tkinter psmisc \
     && cd deepl2 \
     && git clone https://github.com/openai/baselines --depth 1 \
     && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
+    && pipenv install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.7.0-cp35-cp35m-linux_x86_64.whl --keep-outdated \
     && pipenv install baselines/ --keep-outdated \
     && pipenv install --keep-outdated \
     && apk --purge del .builddep openmpi-dev \
