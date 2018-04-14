@@ -17,7 +17,7 @@ WORKDIR /
 
 RUN buildDeps='libopenblas-dev libopenmpi-dev gfortran libfreetype6-dev libpng-dev python3-wheel python3-dev libffi-dev libssl-dev git curl build-essential'; \
     apt-get update \
-    && apt-get install -y --no-install-recommends -qq openmpi-bin ffmpeg python3 python3-tk python3-pip libfreetype6 libpng16-16 psmisc libopenblas-base \
+    && apt-get install -y --no-install-recommends -qq openmpi-bin ssh ffmpeg python3 python3-tk python3-pip libfreetype6 libpng16-16 psmisc libopenblas-base \
     && apt-get install -y --no-install-recommends -qq $buildDeps \
     && pip3 install pipenv \
     && pip3 install awscli \
