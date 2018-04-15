@@ -9,7 +9,6 @@ FROM debian:stretch-slim
 
 ENV DEEPL2_YAMAX_VERSION=4.0
 
-ENV DEBIAN_FRONTEND=noninteractive
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
