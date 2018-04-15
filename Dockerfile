@@ -15,8 +15,7 @@ ENV LANG=C.UTF-8
 RUN buildDeps='libopenblas-dev libopenmpi-dev gfortran libfreetype6-dev libpng-dev python3-wheel python3-dev libffi-dev libssl-dev git build-essential'; \
     set -x \
     && apt-get update \
-    && apt-get install -y --no-install-recommends -qq openmpi-bin ssh ffmpeg python3 python3-tk python3-pip libfreetype6 libpng16-16 psmisc libopenblas-base \
-    && apt-get install -y --no-install-recommends -qq $buildDeps \
+    && apt-get install -y --no-install-recommends --no-install-suggests -qq openmpi-bin ssh ffmpeg python3 python3-tk python3-pip libfreetype6 libpng16-16 psmisc libopenblas-base $buildDeps \
     && pip3 install pipenv \
     && pip3 install awscli \
     && git clone https://github.com/Y-modify/deepl2 /deepl2 --depth 1 \
