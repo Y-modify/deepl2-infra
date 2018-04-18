@@ -26,7 +26,8 @@ RUN buildDeps='libopenmpi-dev python3-wheel python3-dev libffi-dev libssl-dev gi
     && pipenv install --skip-lock \
     && rm baselines -r \
     && apt-get purge -y --auto-remove $buildDeps \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /root/.cache
 
 WORKDIR /deepl2
 
