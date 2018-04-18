@@ -22,11 +22,11 @@ RUN buildDeps='libopenmpi-dev python3-wheel python3-dev libffi-dev python3-pip l
     && cd /deepl2 \
     && git clone https://github.com/openai/baselines --depth 1 \
     && sed -i -e 's/mujoco,atari,classic_control,robotics/classic_control/g' baselines/setup.py \
-    && pipenv install baselines/ --skip-lock --system \
+    && pip3 install baselines/ \
     && pipenv install --skip-lock --system \
     && rm baselines -r \
+    && pip3 uninstall pipenv --yes \
     && apt-get purge -y --auto-remove $buildDeps \
-    && pip3 uninstall pipenv \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /root/.cache
 
