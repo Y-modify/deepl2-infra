@@ -2,6 +2,8 @@
 # $DEEPL2_DISCORD_CHANNEL
 # $DEEPL2_DISCORD_TOKEN
 # $DEEPL2_S3_BUCKET_NAME
+# $DEEPL2_BRANCH_NAME
+# $DEEPL2_COMMIT_ID
 # $AWS_ACCESS_KEY_ID
 # $AWS_SECRET_ACCESS_KEY
 
@@ -12,10 +14,10 @@ ENV DEEPL2_YAMAX_VERSION=4.0
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN buildDeps='libopenmpi-dev python3-wheel python3-dev libffi-dev python3-pip libssl-dev git build-essential'; \
+RUN buildDeps='libopenmpi-dev python3-wheel python3-dev libffi-dev python3-pip libssl-dev build-essential'; \
     set -x \
     && apt-get update \
-    && apt-get install -y --no-install-recommends --no-install-suggests -qq openmpi-bin ssh ffmpeg python3 python3-tk $buildDeps \
+    && apt-get install -y --no-install-recommends --no-install-suggests -qq git openmpi-bin ssh ffmpeg python3 python3-tk $buildDeps \
     && pip3 install pipenv \
     && pip3 install awscli \
     && git clone https://github.com/Y-modify/deepl2 /deepl2 --depth 1 \
