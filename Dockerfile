@@ -33,3 +33,5 @@ WORKDIR /deepl2
 ADD https://github.com/Y-modify/YamaX/releases/download/${DEEPL2_YAMAX_VERSION}/YamaX_${DEEPL2_YAMAX_VERSION}.urdf /deepl2/yamax.urdf
 
 COPY run.sh /deepl2/run.sh
+
+CMD ["./run.sh"]
