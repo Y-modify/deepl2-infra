@@ -1,13 +1,16 @@
 #!/bin/bash
 # $BUCKET_NAME must be supplied from environ
 
-ARCHIVE_NAME=train_archive_$(date +%y%m_%H%M%S).tar.xz
-
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch --all
 [ -v DEEPL2_BRANCH_NAME ] && git checkout $DEEPL2_BRANCH_NAME
 git pull
 [ -v DEEPL2_COMMIT_ID ] && git checkout $DEEPL2_COMMIT_ID
+
+commit_id=$(git rev-parse HEAD)
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+ARCHIVE_NAME=${branch_name}_${commit_id}_$(date +%y%m%d_%H%M%S).tar.xz
 
 patch << EOF
 --- YamaX_4.0.urdf	2018-05-04 16:55:18.545944675 +0900
