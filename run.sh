@@ -1,5 +1,5 @@
 #!/bin/bash
-# $BUCKET_NAME must be supplied from environ
+# $DEEPL2_S3_BUCKET_NAME must be supplied from environ
 
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch --all
@@ -36,4 +36,4 @@ EOF
 
 python3 train.py --monitor monitor --save model -se 500 --monitor-video 50000 --timesteps $timesteps --tensorboard ./tblog --discord \
   && tar Jcf $ARCHIVE_NAME monitor model tblog \
-  && aws s3 cp $ARCHIVE_NAME s3://$BUCKET_NAME/
+  && aws s3 cp $ARCHIVE_NAME s3://$DEEPL2_S3_BUCKET_NAME/
