@@ -32,6 +32,8 @@ patch << EOF
        <origin rpy="0 0 0" xyz="0 0 0"/>
 EOF
 
-python3 train.py --monitor monitor --save model -se 500 --monitor-video 50000 --timesteps 10000000 --tensorboard ./tblog --discord \
+[ -v DEEPL2_TIMESTEPS ] && timesteps=$DEEPL2_TIMESTEPS || timesteps=10000000
+
+python3 train.py --monitor monitor --save model -se 500 --monitor-video 50000 --timesteps $timesteps --tensorboard ./tblog --discord \
   && tar Jcf $ARCHIVE_NAME monitor model tblog \
   && aws s3 cp $ARCHIVE_NAME s3://$BUCKET_NAME/
