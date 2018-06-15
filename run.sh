@@ -7,10 +7,7 @@ git fetch --all
 git pull
 [ -v DEEPL2_COMMIT_ID ] && git checkout $DEEPL2_COMMIT_ID
 
-commit_id=$(git rev-parse HEAD)
-branch_name=$(git rev-parse --abbrev-ref HEAD)
-
-ARCHIVE_NAME=${branch_name}_${commit_id}_$(date +%y%m%d_%H%M%S).tar.xz
+ARCHIVE_NAME=${DEEPL2_BRANCH_NAME}_${DEEPL2_COMMIT_ID:0:6}_$(date +%y%m%d_%H%M%S).tar.xz
 
 # patch << EOF
 # --- YamaX_4.0.urdf	2018-05-04 16:55:18.545944675 +0900
