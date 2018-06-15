@@ -35,5 +35,5 @@ ARCHIVE_NAME=${branch_name}_${commit_id}_$(date +%y%m%d_%H%M%S).tar.xz
 [ -v DEEPL2_TIMESTEPS ] && timesteps=$DEEPL2_TIMESTEPS || timesteps=10000000
 
 python3 train.py --monitor monitor --save model -se 500 --monitor-video 50000 --timesteps $timesteps --tensorboard ./tblog --discord \
-  && tar Jcf $ARCHIVE_NAME monitor model tblog \
+  ; tar Jcf $ARCHIVE_NAME monitor model tblog \
   && aws s3 cp $ARCHIVE_NAME s3://$DEEPL2_S3_BUCKET_NAME/
