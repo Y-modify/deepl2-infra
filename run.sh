@@ -12,25 +12,25 @@ branch_name=$(git rev-parse --abbrev-ref HEAD)
 
 ARCHIVE_NAME=${branch_name}_${commit_id}_$(date +%y%m%d_%H%M%S).tar.xz
 
-patch << EOF
---- YamaX_4.0.urdf	2018-05-04 16:55:18.545944675 +0900
-+++ yamax.urdf	2018-05-04 16:55:09.032611604 +0900
-@@ -67,7 +67,13 @@
-     <self_collide>False</self_collide>
-     <material>Gazebo/Grey</material>
-   </gazebo>
--  <link name="base_link"/>
-+  <link name="base_link">
-+    <inertial>
-+      <origin xyz="0 0 0"/>
-+      <mass value="0.0"/>
-+      <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0"/>
-+    </inertial>
-+  </link>
-   <link name="body">
-     <visual>
-       <origin rpy="0 0 0" xyz="0 0 0"/>
-EOF
+# patch << EOF
+# --- YamaX_4.0.urdf	2018-05-04 16:55:18.545944675 +0900
+# +++ yamax.urdf	2018-05-04 16:55:09.032611604 +0900
+# @@ -67,7 +67,13 @@
+#      <self_collide>False</self_collide>
+#      <material>Gazebo/Grey</material>
+#    </gazebo>
+# -  <link name="base_link"/>
+# +  <link name="base_link">
+# +    <inertial>
+# +      <origin xyz="0 0 0"/>
+# +      <mass value="0.0"/>
+# +      <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0"/>
+# +    </inertial>
+# +  </link>
+#    <link name="body">
+#      <visual>
+#        <origin rpy="0 0 0" xyz="0 0 0"/>
+# EOF
 
 [ -v DEEPL2_TIMESTEPS ] && timesteps=$DEEPL2_TIMESTEPS || timesteps=10000000
 
