@@ -14,10 +14,10 @@ ENV DEEPL2_YAMAX_VERSION=4.0
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN buildDeps='libopenmpi-dev python3-wheel python3-dev libffi-dev python3-pip libssl-dev build-essential'; \
+RUN buildDeps='libopenmpi-dev python3-dev libffi-dev libssl-dev build-essential'; \
     set -x \
     && apt-get update \
-    && apt-get install -y --no-install-recommends --no-install-suggests -qq git openmpi-bin ssh ffmpeg python3 python3-tk $buildDeps \
+    && apt-get install -y --no-install-recommends --no-install-suggests -qq git python3-wheel python3-pip openmpi-bin ssh ffmpeg python3 python3-tk $buildDeps \
     && pip3 install pipenv \
     && pip3 install awscli \
     && git clone https://github.com/Y-modify/deepl2 /deepl2 --depth 1 \
@@ -27,7 +27,6 @@ RUN buildDeps='libopenmpi-dev python3-wheel python3-dev libffi-dev python3-pip l
     && pip3 install baselines/ \
     && pipenv install --skip-lock --system \
     && rm baselines -r \
-    && pip3 uninstall pipenv --yes \
     && apt-get purge -y --auto-remove $buildDeps \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /root/.cache

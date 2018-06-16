@@ -7,6 +7,8 @@ git fetch --all
 git pull
 [ -v DEEPL2_COMMIT_ID ] && git checkout $DEEPL2_COMMIT_ID
 
+pipenv install --skip-lock --system
+
 ARCHIVE_NAME=${DEEPL2_BRANCH_NAME}_${DEEPL2_COMMIT_ID:0:6}_$(date +%y%m%d_%H%M%S).tar.xz
 
 # patch << EOF
